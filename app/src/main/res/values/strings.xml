@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Kiwi Cookies and Cakes</string>
+    <string name="itemName">Item name</string>
+    <string name="itemQuantity">Item quantity</string>
+    <string name="itemType">Item type</string>
+    <string name="submit">Submit</string>
+    <string name="inventoryMenu">Inventory Menu</string>
+    <string name="addItem">Add Item</string>
+    <string name="inventoryStatus">Inventory Status</string>
+</resources>

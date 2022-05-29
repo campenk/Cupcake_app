@@ -1,10 +1,29 @@
 <resources>
     <string name="app_name">Kiwi Cookies and Cakes</string>
-    <string name="itemName">Item name</string>
-    <string name="itemQuantity">Item quantity</string>
-    <string name="itemType">Item type</string>
+    <string name="itemName">Item Name</string>
+    <string name="itemQuantity">Item Quantity</string>
+    <string name="itemType">Item Type</string>
     <string name="submit">Submit</string>
     <string name="inventoryMenu">Inventory Menu</string>
     <string name="addItem">Add Item</string>
     <string name="inventoryStatus">Inventory Status</string>
+    <string name="login">Log in</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="adminusername">admin</string>
+    <string name="adminpassword">CookieManagement84</string>
+    <string name="clearItems">Clear Items</string>
+    <string name="testItems">Add Test Items</string>
+    <string name="manageInventory">Manage Inventory</string>
+
+
+    <string-array name="itemTypeArray">
+        <item>Biscuit</item>
+        <item>Cookie</item>
+        <item>Cake</item>
+        <item>Ingredient</item>
+        <item>Other</item>
+    </string-array>
+
+
 </resources>

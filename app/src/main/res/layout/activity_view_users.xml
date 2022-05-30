@@ -16,8 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewViewUsers_output"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
@@ -28,10 +27,14 @@
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonViewUsers_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewViewUsers_title" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewViewUsers_title">
 
+        <TextView
+            android:id="@+id/textViewViewUsers_output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
     <Button
         android:id="@+id/buttonViewUsers_menu"
         android:layout_width="wrap_content"

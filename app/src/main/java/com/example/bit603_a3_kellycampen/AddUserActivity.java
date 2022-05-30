@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +44,8 @@ public class AddUserActivity extends AppCompatActivity {
         EditText editTextEmployeeNumber = findViewById(R.id.editTextAddUser_employeeNumber);
         EditText editTextPhoneNumber = findViewById(R.id.editTextAddUser_phoneNumber);
         EditText editTextAddress = findViewById(R.id.editTextAddUser_address);
+        Button buttonReset = findViewById(R.id.buttonAddUser_reset);
+        Button buttonMenu = findViewById(R.id.buttonAddUser_menu);
 
 
         editTextDateOfBirth.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +91,26 @@ public class AddUserActivity extends AppCompatActivity {
                 userDatabase.dao().addUser(user);
                 Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editTextUsername.setText("");
+                editTextPassword.setText("");
+                editTextDateOfBirth.setText("");
+                editTextEmployeeNumber.setText("");
+                editTextPhoneNumber.setText("");
+                editTextAddress.setText("");
+            }
+        });
+
+        buttonMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ManageUsersActivity.class);
+                startActivity(i);
             }
         });
 

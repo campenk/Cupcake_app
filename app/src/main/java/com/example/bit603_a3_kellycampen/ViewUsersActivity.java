@@ -3,7 +3,9 @@ package com.example.bit603_a3_kellycampen;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ public class ViewUsersActivity extends AppCompatActivity {
         userDatabase = Room.databaseBuilder(getApplicationContext(), UserDatabase_v2.class, "userdb").allowMainThreadQueries().build();
 
         final TextView textViewOutput = findViewById(R.id.textViewViewUsers_output);
+        final Button buttonMenu = findViewById(R.id.buttonViewUsers_menu);
 
         List<User> users = userDatabase.dao().getUsers();
         String output = "Item\t\t\tQuantity\t\t\tType\n";
@@ -29,5 +32,14 @@ public class ViewUsersActivity extends AppCompatActivity {
         }
 
         textViewOutput.setText(output);
+
+        buttonMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ManageUsersActivity.class);
+                startActivity(i);
+            }
+        });
     }
+
 }

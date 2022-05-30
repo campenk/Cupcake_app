@@ -15,7 +15,14 @@
     <string name="clearItems">Clear Items</string>
     <string name="testItems">Add Test Items</string>
     <string name="manageInventory">Manage Inventory</string>
-
+    <string name="addUser">Add User</string>
+    <string name="dateOfBirth">Date Of Birth</string>
+    <string name="employeeNumber">Employee Number</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="manageUsers">Manage Users</string>
+    <string name="viewUsers">View Users</string>
+    <string name="removeUser">Remove User</string>
 
     <string-array name="itemTypeArray">
         <item>Biscuit</item>

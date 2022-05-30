@@ -6,7 +6,7 @@ import androidx.room.Query;
 import java.util.List;
 
 @androidx.room.Dao
-public interface Dao {
+public interface ItemDao {
 
     @Insert
     public void addItem(Item item);

@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BIT603_a3_KellyCampen">
         <activity
+            android:name=".ViewUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".ManageInventoryActivity"
             android:exported="false" />
         <activity

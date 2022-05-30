@@ -29,8 +29,8 @@ public class ManageUsersActivity extends AppCompatActivity {
         buttonViewUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   Intent i = new Intent(getApplicationContext(), AddUserActivity.class);
-             //   startActivity(i);
+                Intent i = new Intent(getApplicationContext(), ViewUsersActivity.class);
+                startActivity(i);
             }
         });
 

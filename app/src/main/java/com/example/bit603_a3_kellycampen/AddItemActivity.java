@@ -48,6 +48,10 @@ public class AddItemActivity extends AppCompatActivity   {
                 inputIsValid.put(editTextItemName, false);
                 inputIsValid.put(editTextItemQuantity, false);
 
+                Utilities util = new Utilities();
+                util.checkValidString(editTextItemName, inputIsValid);
+                util.checkValidInteger(editTextItemQuantity, inputIsValid);
+
 
 
                 String itemName = editTextItemName.getText().toString();

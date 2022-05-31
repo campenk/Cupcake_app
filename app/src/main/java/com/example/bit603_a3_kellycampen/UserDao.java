@@ -13,4 +13,7 @@ public interface UserDao {
 
     @Query("SELECT * FROM User")
     public List<User> getUsers();
+
+    @Query("DELETE FROM User WHERE Username = :username")
+    abstract void deleteByUsername(String username);
 }

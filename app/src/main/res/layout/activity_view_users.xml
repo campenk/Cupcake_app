@@ -25,6 +25,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
+        android:scrollbars="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/buttonViewUsers_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

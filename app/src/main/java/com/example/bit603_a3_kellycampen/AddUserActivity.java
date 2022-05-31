@@ -16,7 +16,10 @@ import android.widget.Toast;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 
 public class AddUserActivity extends AppCompatActivity {
     public static UserDatabase_v2 userDatabase;
@@ -25,7 +28,7 @@ public class AddUserActivity extends AppCompatActivity {
     final Calendar cldr = Calendar.getInstance();
     int day = cldr.get(Calendar.DAY_OF_MONTH);
     int month = cldr.get(Calendar.MONTH);
-    Date dateOfBirth;
+    String dateOfBirth;
 
 
 
@@ -56,14 +59,15 @@ public class AddUserActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
                                 editTextDateOfBirth.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 setDay(dayOfMonth);
                                 setMonth(monthOfYear);
                                 setYear(year);
                                 cldr.set(year, monthOfYear,  dayOfMonth);
-
                                 Date date = new Date(cldr.getTimeInMillis());
-                                setDateOfBirth(date);
+                                setDateOfBirth(date.toString());
+                                editTextDateOfBirth.setText(dateOfBirth);
                             }
                         },year, month, day);
                 picker.show();
@@ -77,19 +81,37 @@ public class AddUserActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                HashMap<EditText, Boolean> requiredFields = new HashMap<>();
+                Utilities util = new Utilities();
                 User user = new User();
-                user.setUsername(editTextUsername.getText().toString());
-                user.setPassword(editTextPassword.getText().toString());
 
-                user.setDateOfBirth(String.valueOf(dateOfBirth));
-                user.setEmployeeNumber(Integer.parseInt(editTextEmployeeNumber.getText().toString()));
-                user.setPhoneNumber(editTextPhoneNumber.getText().toString());
-                user.setAddress(editTextAddress.getText().toString());
-                Log.d(TAG, "user object created");
+                //  TODO: prevent duplicate username being added
+                util.checkValidString(editTextUsername, requiredFields);
+                util.checkValidString(editTextPassword, requiredFields);
+                util.checkValidString(editTextAddress, requiredFields);
+                util.checkValidString(editTextPhoneNumber, requiredFields);
 
-                userDatabase.dao().addUser(user);
-                Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
+                //  TODO: Improve method for validating dob input
+                util.checkValidString(editTextDateOfBirth, requiredFields);
+
+                util.checkValidInteger(editTextEmployeeNumber, requiredFields);
+
+if (!requiredFields.containsValue(false)) {
+    user.setUsername(editTextUsername.getText().toString());
+    user.setPassword(editTextPassword.getText().toString());
+    user.setAddress(editTextAddress.getText().toString());
+    user.setPhoneNumber(editTextPhoneNumber.getText().toString());
+    user.setDateOfBirth(editTextDateOfBirth.getText().toString());
+    user.setEmployeeNumber(Integer.parseInt(editTextEmployeeNumber.getText().toString()));
+
+    userDatabase.dao().addUser(user);
+    Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
+
+}
+
+
+
+
 
             }
         });
@@ -144,11 +166,11 @@ public class AddUserActivity extends AppCompatActivity {
 
     int year = cldr.get(Calendar.YEAR);
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 }

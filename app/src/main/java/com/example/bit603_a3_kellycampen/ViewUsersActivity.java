@@ -25,10 +25,20 @@ public class ViewUsersActivity extends AppCompatActivity {
         final Button buttonMenu = findViewById(R.id.buttonViewUsers_menu);
 
         List<User> users = userDatabase.dao().getUsers();
-        String output = "Item\t\t\tQuantity\t\t\tType\n";
+        String output = "Username\t\t\t" +
+                "Password\t\t\t" +
+                "Employee Number\t\t\t" +
+                "Date Of Birth\t\t\t" +
+                "Phone Number\t\t\t" +
+                "Address\n";
 
         for (User user : users) {
-            output += user.getUsername() + "\t\t\t" + user.getPassword() + "\t\t\t" + user.getEmployeeNumber().toString() + "\n";
+            output += user.getUsername() + "\t\t\t"
+                    + user.getPassword() + "\t\t\t"
+                    + user.getEmployeeNumber().toString() + "\t\t\t"
+                    + user.getDateOfBirth() + "\t\t\t"
+                    + user.getPhoneNumber() + "\t\t\t"
+                    + user.getAddress() + "\n";
         }
 
         textViewOutput.setText(output);

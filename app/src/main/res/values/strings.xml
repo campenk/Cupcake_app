@@ -25,6 +25,7 @@
     <string name="removeUser">Remove User</string>
     <string name="manageUsersMenu">Return To Users Menu</string>
     <string name="reset">Reset</string>
+    <string name="findUser">Find User</string>
 
     <string-array name="itemTypeArray">
         <item>Biscuit</item>

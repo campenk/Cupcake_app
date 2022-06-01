@@ -45,4 +45,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonManageUsers_viewUsers" />
+
+    <Button
+        android:id="@+id/buttonManageUsers_Inventory"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/manageInventory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonManageUsers_removeUser" />
 </androidx.constraintlayout.widget.ConstraintLayout>

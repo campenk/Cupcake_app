@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InventoryStatusActivity">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     <TextView
         android:id="@+id/textViewInventoryStatus_output"
@@ -17,7 +23,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/buttonInventoryStatus_InventoryMenu"
+        app:layout_constraintBottom_toTopOf="@+id/buttonInventoryStatus_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewInventoryStatus_title" />
@@ -36,21 +42,29 @@
         android:id="@+id/buttonInventoryStatus_InventoryMenu"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginBottom="32dp"
         android:text="@string/inventoryMenu"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/buttonInventoryStatus_next"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="32dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="@string/next"
+        app:layout_constraintBottom_toTopOf="@+id/buttonInventoryStatus_InventoryMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+    <Button
+        android:id="@+id/buttonInventoryStatus_previous"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/previous"
+        app:layout_constraintBottom_toTopOf="@+id/buttonInventoryStatus_InventoryMenu"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

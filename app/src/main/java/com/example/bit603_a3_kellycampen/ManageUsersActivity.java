@@ -17,6 +17,7 @@ public class ManageUsersActivity extends AppCompatActivity {
         Button buttonAddUser = findViewById(R.id.buttonManageUsers_AddUser);
         Button buttonViewUsers = findViewById(R.id.buttonManageUsers_viewUsers);
         Button buttonRemoveUsers = findViewById(R.id.buttonManageUsers_removeUser);
+        Button buttonManageInventory = findViewById(R.id.buttonManageUsers_Inventory);
 
         buttonAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +39,14 @@ public class ManageUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                Intent i = new Intent(getApplicationContext(), RemoveUserActivity.class);
+                startActivity(i);
+            }
+        });
+
+        buttonManageInventory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ManageInventoryActivity.class);
                 startActivity(i);
             }
         });

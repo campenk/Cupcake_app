@@ -26,6 +26,9 @@
     <string name="manageUsersMenu">Return To Users Menu</string>
     <string name="reset">Reset</string>
     <string name="findUser">Find User</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="noItems">Error! There are no items in the inventory</string>
 
     <string-array name="itemTypeArray">
         <item>Biscuit</item>

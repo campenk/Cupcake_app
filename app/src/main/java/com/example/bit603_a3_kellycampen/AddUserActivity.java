@@ -5,7 +5,9 @@ import androidx.room.Room;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -49,8 +51,17 @@ public class AddUserActivity extends AppCompatActivity {
         EditText editTextAddress = findViewById(R.id.editTextAddUser_address);
         Button buttonReset = findViewById(R.id.buttonAddUser_reset);
         Button buttonMenu = findViewById(R.id.buttonAddUser_menu);
+        if (Build.VERSION.SDK_INT >= 21) {
+            editTextDateOfBirth.setShowSoftInputOnFocus(false);
+        } else if (Build.VERSION.SDK_INT >= 11) {
+            editTextDateOfBirth.setRawInputType(InputType.TYPE_CLASS_TEXT);
+            editTextDateOfBirth.setTextIsSelectable(true);
+        } else {
+            editTextDateOfBirth.setRawInputType(InputType.TYPE_NULL);
+            editTextDateOfBirth.isFocusable();
+        }
 
-
+        //  TODO: Change to when receives focus
         editTextDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

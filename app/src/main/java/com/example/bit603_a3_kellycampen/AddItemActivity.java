@@ -44,9 +44,9 @@ public class AddItemActivity extends AppCompatActivity   {
             @Override
             public void onClick(View v) {
 
-                HashMap<EditText, Boolean> inputIsValid = new HashMap<>();
-                inputIsValid.put(editTextItemName, false);
-                inputIsValid.put(editTextItemQuantity, false);
+                HashMap<EditText, String> inputIsValid = new HashMap<>();
+                inputIsValid.put(editTextItemName, null);
+                inputIsValid.put(editTextItemQuantity, null);
 
                 Utilities util = new Utilities();
                 util.checkValidString(editTextItemName, inputIsValid);
@@ -72,8 +72,8 @@ public class AddItemActivity extends AppCompatActivity   {
         buttonInventoryMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent i = new Intent(getApplicationContext(), MainActivity.class);
-              //  startActivity(i);
+                Intent i = new Intent(getApplicationContext(), ManageInventoryActivity.class);
+                startActivity(i);
             }
         });
 

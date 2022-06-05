@@ -14,6 +14,8 @@ public class ManageUsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_users);
 
+        Intent i = getIntent();
+        String username = i.getStringExtra(getString(R.string.username));
         Button buttonAddUser = findViewById(R.id.buttonManageUsers_AddUser);
         Button buttonViewUsers = findViewById(R.id.buttonManageUsers_viewUsers);
         Button buttonRemoveUsers = findViewById(R.id.buttonManageUsers_removeUser);
@@ -23,6 +25,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), AddUserActivity.class);
+                i.putExtra(getString(R.string.username), username);
                 startActivity(i);
             }
         });
@@ -31,6 +34,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ViewUsersActivity.class);
+                i.putExtra(getString(R.string.username), username);
                 startActivity(i);
             }
         });
@@ -39,6 +43,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                Intent i = new Intent(getApplicationContext(), RemoveUserActivity.class);
+                i.putExtra(getString(R.string.username), username);
                 startActivity(i);
             }
         });
@@ -47,6 +52,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ManageInventoryActivity.class);
+                i.putExtra(getString(R.string.username), username);
                 startActivity(i);
             }
         });

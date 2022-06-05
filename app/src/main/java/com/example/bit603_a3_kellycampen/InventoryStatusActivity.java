@@ -122,7 +122,7 @@ public class InventoryStatusActivity extends AppCompatActivity {
         });
 
     }
-
+//  TODO: Check what happens if result is decimal
     public String updateOutput (Integer pageNumber, Integer totalPages, List<Item> items) {
         String output = "Item\t\t\tQuantity\t\t\tType\n";
         for (int i = pageNumber*5; i < (pageNumber*5) + 5; i++) {

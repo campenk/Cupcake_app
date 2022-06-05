@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,10 @@ import java.util.List;
 public class LogInActivity extends AppCompatActivity {
     private final static String TAG = "Campen";
     public static UserDatabase_v2 userDatabase;
+    private Utilities util = new Utilities();
+    private UserList userList = new UserList();
+    private User currentUser;
+    private List<User> users;
 
 
     @Override
@@ -23,33 +28,29 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         userDatabase = Room.databaseBuilder(getApplicationContext(), UserDatabase_v2.class, "userdb").allowMainThreadQueries().build();
-        Utilities util = new Utilities();
 
         Button buttonSubmit = findViewById(R.id.buttonLogin_submit);
         EditText editTextUsername = findViewById(R.id.editTextTextLogin_username);
         EditText editTextPassword = findViewById(R.id.editTextLogin_password);
-        editTextUsername.setText(R.string.adminusername);
+        editTextUsername.setText("admin");
         editTextPassword.setText(R.string.adminpassword);
+
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = editTextUsername.getText().toString();
-                String password = editTextPassword.getText().toString();
-              //  Log.d(TAG, "username and password" + username + password);
-              //  Log.d(TAG, "user is admin: " +userIsAdmin(username, password).toString());
-                if (userIsAdmin(editTextUsername.getText().toString(), editTextPassword.getText().toString())) {
+                //  check if user is admin
+                    if (userList.userIsAdmin(editTextUsername.getText().toString(), editTextPassword.getText().toString())) {
+                        Log.d(TAG, "User is admin = true");
                     Intent i = new Intent(getApplicationContext(), ManageUsersActivity.class);
-                    startActivity(i);
+                        i.putExtra(getString(R.string.username), editTextUsername.getText().toString());
+                        startActivity(i);
+                        Log.d(TAG, "Start Activity");
                 }
                 else {
-                    User currentUser = null;
-                    List<User> users = userDatabase.dao().getUsers();
-                    for (User user : users) {
-                        if (editTextUsername.getText().toString().equals(user.getUsername())) {
-                            currentUser = user;
-                        }
-                    }
+                        users = userDatabase.dao().getUsers();
+                        currentUser = userList.userExists(editTextUsername.getText().toString(), users);
+
 
                     if (currentUser.equals(null)) {
                         Toast.makeText(getBaseContext(),"User not found!", Toast.LENGTH_SHORT).show();
@@ -59,6 +60,7 @@ public class LogInActivity extends AppCompatActivity {
                     else {
                         if (editTextPassword.getText().toString().equals(currentUser.getPassword())) {
                             Intent i = new Intent(getApplicationContext(), ManageInventoryActivity.class);
+                            i.putExtra(getString(R.string.username), editTextUsername.getText().toString());
                             startActivity(i);
                         }
                         else {
@@ -68,12 +70,13 @@ public class LogInActivity extends AppCompatActivity {
 
                         }
                     }
+                    }
                 }
 
 
 
 
-            }
+
         });
 
 
@@ -85,14 +88,6 @@ public class LogInActivity extends AppCompatActivity {
 
 
     }
-    //  check if user is admin
-    public Boolean userIsAdmin (String username, String password) {
 
-        //  TODO: Use string resource
-        if (username.equals("admin") && password.equals("CookieManagement84")) {
-            return true;
-        }
-        return false;
-    }
 
 }

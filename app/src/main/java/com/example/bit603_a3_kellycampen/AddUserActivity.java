@@ -3,13 +3,16 @@ package com.example.bit603_a3_kellycampen;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -31,6 +34,8 @@ public class AddUserActivity extends AppCompatActivity {
     int day = cldr.get(Calendar.DAY_OF_MONTH);
     int month = cldr.get(Calendar.MONTH);
     String dateOfBirth;
+    Utilities util = new Utilities();
+    UserList userList = new UserList();
 
 
 
@@ -51,79 +56,79 @@ public class AddUserActivity extends AppCompatActivity {
         EditText editTextAddress = findViewById(R.id.editTextAddUser_address);
         Button buttonReset = findViewById(R.id.buttonAddUser_reset);
         Button buttonMenu = findViewById(R.id.buttonAddUser_menu);
-        if (Build.VERSION.SDK_INT >= 21) {
-            editTextDateOfBirth.setShowSoftInputOnFocus(false);
-        } else if (Build.VERSION.SDK_INT >= 11) {
-            editTextDateOfBirth.setRawInputType(InputType.TYPE_CLASS_TEXT);
-            editTextDateOfBirth.setTextIsSelectable(true);
-        } else {
-            editTextDateOfBirth.setRawInputType(InputType.TYPE_NULL);
-            editTextDateOfBirth.isFocusable();
-        }
+        List<User> users = userDatabase.dao().getUsers();
 
+        // date picker dialog
+        picker = new DatePickerDialog(AddUserActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        editTextDateOfBirth.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        setDay(dayOfMonth);
+                        setMonth(monthOfYear);
+                        setYear(year);
+                        cldr.set(year, monthOfYear,  dayOfMonth);
+                        Date date = new Date(cldr.getTimeInMillis());
+                        setDateOfBirth(date.toString());
+                        editTextDateOfBirth.setText(dateOfBirth);
+                    }
+                },year, month, day);
         //  TODO: Change to when receives focus
+        editTextDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    util.hideKeyboard(editTextDateOfBirth);
+                    picker.show();
+                } else {
+                    picker.hide();
+                }
+            }
+        });
+
         editTextDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // date picker dialog
-                picker = new DatePickerDialog(AddUserActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                                editTextDateOfBirth.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                                setDay(dayOfMonth);
-                                setMonth(monthOfYear);
-                                setYear(year);
-                                cldr.set(year, monthOfYear,  dayOfMonth);
-                                Date date = new Date(cldr.getTimeInMillis());
-                                setDateOfBirth(date.toString());
-                                editTextDateOfBirth.setText(dateOfBirth);
-                            }
-                        },year, month, day);
+                util.hideKeyboard(editTextDateOfBirth);
                 picker.show();
-            //    Log.d(TAG, dateOfBirth.toString());
             }
-
         });
+
 
 
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<EditText, Boolean> requiredFields = new HashMap<>();
-                Utilities util = new Utilities();
+                HashMap<EditText, String> requiredFields = new HashMap<>();
                 User user = new User();
 
-                //  TODO: prevent duplicate username being added
-                util.checkValidString(editTextUsername, requiredFields);
-                util.checkValidString(editTextPassword, requiredFields);
-                util.checkValidString(editTextAddress, requiredFields);
-                util.checkValidString(editTextPhoneNumber, requiredFields);
+                if (userList.userExists(editTextUsername.getText().toString(), users) == null) {
+                    util.checkValidString(editTextUsername, requiredFields);
+                    util.checkValidString(editTextPassword, requiredFields);
+                    util.checkValidString(editTextAddress, requiredFields);
+                    util.checkValidString(editTextPhoneNumber, requiredFields);
+                    util.checkValidInteger(editTextEmployeeNumber, requiredFields);
+                    //  TODO: Improve method for validating dob input
+                    util.checkValidString(editTextDateOfBirth, requiredFields);
 
-                //  TODO: Improve method for validating dob input
-                util.checkValidString(editTextDateOfBirth, requiredFields);
+                    if (!requiredFields.containsValue(null)) {
+                        user.setUsername(editTextUsername.getText().toString());
+                        user.setPassword(editTextPassword.getText().toString());
+                        user.setAddress(editTextAddress.getText().toString());
+                        user.setPhoneNumber(editTextPhoneNumber.getText().toString());
+                        user.setDateOfBirth(editTextDateOfBirth.getText().toString());
+                        user.setEmployeeNumber(Integer.parseInt(editTextEmployeeNumber.getText().toString()));
+                        userDatabase.dao().addUser(user);
+                        Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
 
-                util.checkValidInteger(editTextEmployeeNumber, requiredFields);
-
-if (!requiredFields.containsValue(false)) {
-    user.setUsername(editTextUsername.getText().toString());
-    user.setPassword(editTextPassword.getText().toString());
-    user.setAddress(editTextAddress.getText().toString());
-    user.setPhoneNumber(editTextPhoneNumber.getText().toString());
-    user.setDateOfBirth(editTextDateOfBirth.getText().toString());
-    user.setEmployeeNumber(Integer.parseInt(editTextEmployeeNumber.getText().toString()));
-
-    userDatabase.dao().addUser(user);
-    Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
-
-}
-
-
-
-
-
+                    }
+                }
+                else {
+                    Toast.makeText(getBaseContext(),"A user already exists with this username!", Toast.LENGTH_SHORT).show();
+                    util.formatInvalidInput(editTextUsername);
+                }
             }
         });
 

@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="secondaryButton">#FF454545</color>
+    <color name="usersMenu">#FF3F51B5</color>
+    <color name="inventoryMenu">#CF0F50</color>
 </resources>

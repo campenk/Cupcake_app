@@ -16,6 +16,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <EditText
         android:id="@+id/editTextRemoveUser_username"
         android:layout_width="wrap_content"
@@ -34,6 +41,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
         android:text="@string/findUser"
+        app:backgroundTint="@color/usersMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextRemoveUser_username" />
@@ -44,8 +52,19 @@
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
         android:text="@string/manageUsersMenu"
-        app:backgroundTint="@color/secondaryButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/usersMenu"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonRemoveUser_find" />
+
+    <Button
+        android:id="@+id/buttonRemoveUser_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="@string/logout"
+        app:backgroundTint="@color/secondaryButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/buttonRemoveUser_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
@@ -36,13 +44,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
+
     <Button
         android:id="@+id/buttonViewUsers_menu"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginBottom="32dp"
         android:text="@string/manageUsersMenu"
+        app:backgroundTint="@color/usersMenu"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonViewUsers_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="@string/logout"
+        app:backgroundTint="@color/secondaryButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/buttonViewUsers_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

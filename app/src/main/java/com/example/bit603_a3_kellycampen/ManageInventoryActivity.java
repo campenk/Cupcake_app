@@ -7,11 +7,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class ManageInventoryActivity extends AppCompatActivity {
     public static ItemDatabase itemDatabase;
+    private final String TAG = "Campen";
 
     
     @Override
@@ -19,17 +21,37 @@ public class ManageInventoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_inventory);
         itemDatabase = Room.databaseBuilder(getApplicationContext(), ItemDatabase.class, "itemdb").allowMainThreadQueries().build();
+        Intent i = getIntent();
+        String username = i.getStringExtra(getString(R.string.username));
+        Log.d(TAG, "get intent extra");
+
+        final Button buttonInventoryStatus = findViewById(R.id.buttonManageInventory_status);
+        final Button buttonAddItem = findViewById(R.id.buttonManageInventory_add);
+        final Button buttonClearItems = findViewById(R.id.buttonManageInventory_clear);
+        final Button buttonTestItems = findViewById(R.id.buttonManageInventory_test);
+        final Button buttonUserMenu = findViewById(R.id.buttonManageInventory_UserMenu);
+        final Button buttonLogout = findViewById(R.id.buttonManageInventory_logout);
+        Log.d(TAG, "create variables");
+
+        if (username.equals(getString(R.string.adminusername))) {
+            buttonUserMenu.setVisibility(View.VISIBLE);
+        }
+        else {
+            buttonUserMenu.setVisibility(View.GONE);
+        }
 
 
-        Button buttonInventoryStatus = findViewById(R.id.buttonManageInventory_status);
-        Button buttonAddItem = findViewById(R.id.buttonManageInventory_add);
-        Button buttonClearItems = findViewById(R.id.buttonManageInventory_clear);
-        Button buttonTestItems = findViewById(R.id.buttonManageInventory_test);
+
+//        if (username.equals(getString(R.string.adminusername))) {
+//            buttonUserMenu.setVisibility(View.VISIBLE);
+//
+//        }
 
         buttonInventoryStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), InventoryStatusActivity.class);
+                i.putExtra(getString(R.string.username), username);
                 startActivity(i);
             }
         });
@@ -38,6 +60,7 @@ public class ManageInventoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), AddItemActivity.class);
+                i.putExtra(getString(R.string.username), username);
                 startActivity(i);
             }
         });
@@ -93,6 +116,23 @@ public class ManageInventoryActivity extends AppCompatActivity {
 
                 // Show dialog
                 dialog.show();
+            }
+        });
+
+        buttonUserMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ManageUsersActivity.class);
+                i.putExtra(getString(R.string.username), username);
+                startActivity(i);
+            }
+        });
+
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), LogInActivity.class);
+                startActivity(i);
             }
         });
     }

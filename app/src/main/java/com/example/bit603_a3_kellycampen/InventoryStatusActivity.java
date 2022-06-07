@@ -22,11 +22,14 @@ public class InventoryStatusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_status);
         itemDatabase = Room.databaseBuilder(getApplicationContext(), ItemDatabase.class, "itemdb").allowMainThreadQueries().build();
+        Intent i = getIntent();
+        String username = i.getStringExtra(getString(R.string.username));
 
         final TextView textViewOutput = findViewById(R.id.textViewInventoryStatus_output);
         final Button buttonInventoryMenu = findViewById(R.id.buttonInventoryStatus_InventoryMenu);
         final Button buttonNext = findViewById(R.id.buttonInventoryStatus_next);
         final Button buttonPrevious = findViewById(R.id.buttonInventoryStatus_previous);
+        final Button buttonLogout = findViewById(R.id.buttonInventoryStatus_logout);
 
         List<Item> items = itemDatabase.dao().getItems();
         Log.d(TAG, "items is null");
@@ -117,6 +120,15 @@ public class InventoryStatusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ManageInventoryActivity.class);
+                i.putExtra(getString(R.string.username), username);
+                startActivity(i);
+            }
+        });
+
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), LogInActivity.class);
                 startActivity(i);
             }
         });

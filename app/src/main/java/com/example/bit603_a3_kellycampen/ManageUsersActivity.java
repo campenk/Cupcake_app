@@ -16,10 +16,11 @@ public class ManageUsersActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String username = i.getStringExtra(getString(R.string.username));
-        Button buttonAddUser = findViewById(R.id.buttonManageUsers_AddUser);
-        Button buttonViewUsers = findViewById(R.id.buttonManageUsers_viewUsers);
-        Button buttonRemoveUsers = findViewById(R.id.buttonManageUsers_removeUser);
-        Button buttonManageInventory = findViewById(R.id.buttonManageUsers_Inventory);
+        final Button buttonAddUser = findViewById(R.id.buttonManageUsers_AddUser);
+        final Button buttonViewUsers = findViewById(R.id.buttonManageUsers_viewUsers);
+        final Button buttonRemoveUsers = findViewById(R.id.buttonManageUsers_removeUser);
+        final Button buttonManageInventory = findViewById(R.id.buttonManageUsers_Inventory);
+        final Button buttonLogout = findViewById(R.id.buttonManageUsers_logout);
 
         buttonAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,14 @@ public class ManageUsersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ManageInventoryActivity.class);
                 i.putExtra(getString(R.string.username), username);
+                startActivity(i);
+            }
+        });
+
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), LogInActivity.class);
                 startActivity(i);
             }
         });

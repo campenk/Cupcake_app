@@ -28,12 +28,19 @@ public class UserList {
     }
 
 
-    public User userExists (String username, List<User> users) {
+    public Boolean userExists (String username, List<User> users) {
+        for (User user : users) {
+            if (username.toLowerCase().equals(user.getUsername().toLowerCase())) {
+                return true;            }
+        }
+        return false;
+    }
+
+    public User returnUser (String username, List<User> users) {
         User currentUser = null;
         for (User user : users) {
             if (username.toLowerCase().equals(user.getUsername().toLowerCase())) {
-                currentUser = user;
-            }
+                currentUser = user;            }
         }
         return currentUser;
     }

@@ -85,10 +85,10 @@ public class ExampleUnitTest {
     @Test
     public void dateValidator_isCorrect () {
 
-        assertTrue(util.isDateValid("2019/02/28"));
+        assertTrue(util.isDateValid("2022-03-13"));
+        assertFalse(util.isDateValid("2019/02/28"));
         assertFalse(util.isDateValid("02/30/2019"));
     }
-
 
 
 

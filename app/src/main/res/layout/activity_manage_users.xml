@@ -16,43 +16,86 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonManageUsers_AddUser"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/addUser"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewManageUsers_title" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
-    <Button
-        android:id="@+id/buttonManageUsers_viewUsers"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="32dp"
-        android:text="@string/viewUsers"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonManageUsers_AddUser" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewManageUsers_title">
 
-    <Button
-        android:id="@+id/buttonManageUsers_removeUser"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/removeUser"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonManageUsers_viewUsers" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/buttonManageUsers_Inventory"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/manageInventory"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonManageUsers_removeUser" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonManageUsers_viewUsers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/viewUsers"
+                    app:backgroundTint="@color/usersMenu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonManageUsers_AddUser" />
+
+                <Button
+                    android:id="@+id/buttonManageUsers_Inventory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/manageInventory"
+                    app:backgroundTint="@color/inventoryMenu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonManageUsers_removeUser" />
+
+                <Button
+                    android:id="@+id/buttonManageUsers_removeUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/removeUser"
+                    app:backgroundTint="@color/usersMenu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonManageUsers_viewUsers" />
+
+                <Button
+                    android:id="@+id/buttonManageUsers_AddUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:text="@string/addUser"
+                    app:backgroundTint="@color/usersMenu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/buttonManageUsers_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/logout"
+                    app:backgroundTint="@color/secondaryButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonManageUsers_Inventory" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,56 +6,112 @@
     android:layout_height="match_parent"
     tools:context=".ManageInventoryActivity">
 
-    <Button
-        android:id="@+id/buttonManageInventory_add"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/addItem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonManageInventory_status" />
-
-    <Button
-        android:id="@+id/buttonManageInventory_clear"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/clearItems"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonManageInventory_add" />
-
-    <Button
-        android:id="@+id/buttonManageInventory_test"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/testItems"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonManageInventory_clear" />
-
-    <Button
-        android:id="@+id/buttonManageInventory_status"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/inventoryStatus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewManageInventory_title" />
-
     <TextView
         android:id="@+id/textViewManageInventory_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:text="@string/manageInventory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/manageInventory" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewManageInventory_title"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <Button
+                    android:id="@+id/buttonManageInventory_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:text="@string/inventoryStatus"
+                    app:backgroundTint="@color/inventoryMenu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/buttonManageInventory_test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/testItems"
+                    app:backgroundTint="@color/inventoryMenu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonManageInventory_clear" />
+
+                <Button
+                    android:id="@+id/buttonManageInventory_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/addItem"
+                    app:backgroundTint="@color/inventoryMenu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonManageInventory_status" />
+
+                <Button
+                    android:id="@+id/buttonManageInventory_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/logout"
+                    app:backgroundTint="@color/secondaryButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonManageInventory_UserMenu" />
+
+                <Button
+                    android:id="@+id/buttonManageInventory_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/clearItems"
+                    app:backgroundTint="@color/inventoryMenu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonManageInventory_add" />
+
+                <Button
+                    android:id="@+id/buttonManageInventory_UserMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/manageUsersMenu"
+                    app:backgroundTint="@color/usersMenu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonManageInventory_test"
+                    tools:visibility="gone" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,18 +44,21 @@ public class AddUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
-
         userDatabase = Room.databaseBuilder(getApplicationContext(), UserDatabase_v2.class, "userdb").allowMainThreadQueries().build();
+        Intent i = getIntent();
+        String username = i.getStringExtra(getString(R.string.username));
 
-        Button buttonSubmit = findViewById(R.id.buttonAddUser_submit);
-        EditText editTextUsername = findViewById(R.id.editTextAddUser_username);
-        EditText editTextPassword = findViewById(R.id.editTextAddUser_Password);
-        EditText editTextDateOfBirth = findViewById(R.id.editTextAddUser_dateOfBirth);
-        EditText editTextEmployeeNumber = findViewById(R.id.editTextAddUser_employeeNumber);
-        EditText editTextPhoneNumber = findViewById(R.id.editTextAddUser_phoneNumber);
-        EditText editTextAddress = findViewById(R.id.editTextAddUser_address);
-        Button buttonReset = findViewById(R.id.buttonAddUser_reset);
-        Button buttonMenu = findViewById(R.id.buttonAddUser_menu);
+
+        final Button buttonSubmit = findViewById(R.id.buttonAddUser_submit);
+        final EditText editTextUsername = findViewById(R.id.editTextAddUser_username);
+        final EditText editTextPassword = findViewById(R.id.editTextAddUser_Password);
+        final EditText editTextDateOfBirth = findViewById(R.id.editTextAddUser_dateOfBirth);
+        final EditText editTextEmployeeNumber = findViewById(R.id.editTextAddUser_employeeNumber);
+        final EditText editTextPhoneNumber = findViewById(R.id.editTextAddUser_phoneNumber);
+        final EditText editTextAddress = findViewById(R.id.editTextAddUser_address);
+        final Button buttonReset = findViewById(R.id.buttonAddUser_reset);
+        final Button buttonMenu = findViewById(R.id.buttonAddUser_menu);
+        final Button buttonLogout = findViewById(R.id.buttonAddUser_logout);
         List<User> users = userDatabase.dao().getUsers();
 
         // date picker dialog
@@ -96,51 +99,75 @@ public class AddUserActivity extends AppCompatActivity {
         });
 
 
-
-
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<EditText, String> requiredFields = new HashMap<>();
-                User user = new User();
-
-                if (userList.userExists(editTextUsername.getText().toString(), users) == null) {
-                    util.checkValidString(editTextUsername, requiredFields);
-                    util.checkValidString(editTextPassword, requiredFields);
-                    util.checkValidString(editTextAddress, requiredFields);
-                    util.checkValidString(editTextPhoneNumber, requiredFields);
-                    util.checkValidInteger(editTextEmployeeNumber, requiredFields);
-                    //  TODO: Improve method for validating dob input
-                    util.checkValidString(editTextDateOfBirth, requiredFields);
-
-                    if (!requiredFields.containsValue(null)) {
-                        user.setUsername(editTextUsername.getText().toString());
-                        user.setPassword(editTextPassword.getText().toString());
-                        user.setAddress(editTextAddress.getText().toString());
-                        user.setPhoneNumber(editTextPhoneNumber.getText().toString());
-                        user.setDateOfBirth(editTextDateOfBirth.getText().toString());
-                        user.setEmployeeNumber(Integer.parseInt(editTextEmployeeNumber.getText().toString()));
-                        userDatabase.dao().addUser(user);
-                        Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-                else {
-                    Toast.makeText(getBaseContext(),"A user already exists with this username!", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "create hashmap");
+                if (userList.userExists(editTextUsername.getText().toString(), users)) {
+                    Log.d(TAG, "User already exists");
+                    Toast.makeText(getBaseContext(), "A user already exists with this username!", Toast.LENGTH_SHORT).show();
                     util.formatInvalidInput(editTextUsername);
                 }
-            }
+
+                else {
+                        Log.d(TAG, "user is not null");
+                    User user = new User();
+
+                    if (util.checkValidString(editTextUsername, requiredFields)) {
+                        user.setUsername(editTextUsername.getText().toString());
+                    }
+                    if (util.checkValidString(editTextPassword, requiredFields)) {
+                        user.setPassword(editTextPassword.getText().toString());
+
+                    }
+                    if (util.checkValidString(editTextAddress, requiredFields)) {
+                        user.setAddress(editTextAddress.getText().toString());
+                    }
+
+                    if (util.checkValidString(editTextPhoneNumber, requiredFields)) {
+                        user.setPhoneNumber(editTextPhoneNumber.getText().toString());
+                    }
+
+                    if (util.checkValidInteger(editTextEmployeeNumber, requiredFields)) {
+                        user.setEmployeeNumber(Integer.parseInt(editTextEmployeeNumber.getText().toString()));
+                    }
+
+                    Log.d(TAG, editTextDateOfBirth.getText().toString());
+                    Log.d(TAG, "checkValidDate function returns " + util.checkValidDate(editTextDateOfBirth, requiredFields).toString());
+                    if (util.checkValidDate(editTextDateOfBirth, requiredFields)) {
+                        Log.d(TAG, "if checkValidDate function returns true - why tho");
+                        user.setDateOfBirth(editTextDateOfBirth.getText().toString());
+                        Log.d(TAG, editTextDateOfBirth.getText().toString());
+                    }
+
+                    if (!requiredFields.containsValue(null)) {
+
+                            Log.d(TAG, "no values are null");
+                            userDatabase.dao().addUser(user);
+                            Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    else {
+                        Toast.makeText(getBaseContext(),"Invalid inputs, please try again", Toast.LENGTH_SHORT).show();
+
+                        Log.d(TAG, "required fields contains null values");
+
+                    }
+                    }
+                }
+
         });
 
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editTextUsername.setText("");
-                editTextPassword.setText("");
-                editTextDateOfBirth.setText("");
-                editTextEmployeeNumber.setText("");
-                editTextPhoneNumber.setText("");
-                editTextAddress.setText("");
+                util.formatReset(editTextUsername);
+                util.formatReset(editTextPassword);
+                util.formatReset(editTextDateOfBirth);
+                util.formatReset(editTextEmployeeNumber);
+                util.formatReset(editTextPhoneNumber);
+                util.formatReset(editTextAddress);
             }
         });
 
@@ -148,11 +175,18 @@ public class AddUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ManageUsersActivity.class);
+                i.putExtra(getString(R.string.username), username);
                 startActivity(i);
             }
         });
 
-
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), LogInActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 

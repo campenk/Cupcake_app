@@ -49,7 +49,9 @@ public class LogInActivity extends AppCompatActivity {
                 }
                 else {
                         users = userDatabase.dao().getUsers();
-                        currentUser = userList.userExists(editTextUsername.getText().toString(), users);
+                        if (userList.userExists(editTextUsername.getText().toString(), users)) {
+                            currentUser = userList.returnUser(editTextUsername.getText().toString(), users);
+                        }
 
 
                     if (currentUser.equals(null)) {

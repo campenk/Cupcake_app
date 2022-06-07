@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,10 +24,14 @@ public class AddItemActivity extends AppCompatActivity   {
         setContentView(R.layout.activity_add_item);
         itemDatabase = Room.databaseBuilder(getApplicationContext(), ItemDatabase.class, "itemdb").allowMainThreadQueries().build();
 
-        EditText editTextItemName = findViewById(R.id.editTextAddItem_name);
-        EditText editTextItemQuantity = findViewById(R.id.editTextAddItem_quantity);
-        Button buttonSubmit = findViewById(R.id.buttonAddItem_Submit);
-        Button buttonInventoryMenu = findViewById(R.id.buttonAddItem_InventoryMenu);
+        Intent i = getIntent();
+        String username =i.getStringExtra(getString(R.string.username));
+
+        final EditText editTextItemName = findViewById(R.id.editTextAddItem_name);
+        final EditText editTextItemQuantity = findViewById(R.id.editTextAddItem_quantity);
+        final Button buttonSubmit = findViewById(R.id.buttonAddItem_Submit);
+        final Button buttonInventoryMenu = findViewById(R.id.buttonAddItem_InventoryMenu);
+        final Button buttonLogout = findViewById(R.id.buttonAddItem_logout);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerAddItem_type);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -73,11 +78,20 @@ public class AddItemActivity extends AppCompatActivity   {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ManageInventoryActivity.class);
+                i.putExtra(getString(R.string.username), username);
                 startActivity(i);
             }
         });
 
-
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), LogInActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
+
+
 }

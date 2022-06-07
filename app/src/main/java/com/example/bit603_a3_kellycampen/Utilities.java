@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.ArrayRes;
 
@@ -24,48 +25,67 @@ public class Utilities {
     public void formatInvalidInput (EditText editText) {
         editText.setText("");
         editText.setHintTextColor(Color.RED);
+
     }
 
-    public void checkValidString (EditText editText, HashMap<EditText, String> requiredField) {
+    public void formatReset (EditText editText) {
+        editText.setText("");
+        editText.setHintTextColor(Color.BLACK);
+    }
+
+
+    public Boolean checkValidString (EditText editText, HashMap<EditText, String> requiredField) {
         String input = editText.getText().toString();
         if (input.equals("")) {
             formatInvalidInput(editText);
             requiredField.put(editText, input);
+            return false;
         }
         else {
             requiredField.put(editText, null);
+            return true;
         }
     }
 
-    public Integer checkValidInteger (EditText editText, HashMap<EditText, String> requiredFieldsValid) {
+    public Boolean checkValidInteger (EditText editText, HashMap<EditText, String> requiredFieldsValid) {
        Integer input = null;
         try{
            input = Integer.parseInt(editText.getText().toString());
             requiredFieldsValid.put(editText, input.toString());
+            return true;
         }
        catch (Exception e) {
            formatInvalidInput(editText);
            requiredFieldsValid.put(editText, null);
+           return false;
        }
-        return null;
     }
 
-public String checkValidDate (String date, EditText editText, HashMap<EditText, Boolean> requiredFieldsValid) {
+public Boolean checkValidDate (EditText editText, HashMap<EditText, String> requiredFieldsValid) {
     String input = editText.getText().toString();
-    if (!input.equals("")) {
-        if (isDateValid(input)) {
-            requiredFieldsValid.put(editText, true);
-            return input;
-        }
-    }
-    else {
-        Log.d(TAG, "input is null");
+    if (input.equals("") || input.equals(null)) {
+        Log.d(TAG, "DOB is null");
         formatInvalidInput(editText);
-        Log.d(TAG, "format invalid input");
-        requiredFieldsValid.put(editText, false);
-        Log.d(TAG, "put false into hashmap");
+        Log.d(TAG, "format invalid DOB input");
+        requiredFieldsValid.put(editText, null);
+        Log.d(TAG, "put DOB null into hashmap");
+        Log.d(TAG, "return false");
+        return false;
     }
-    return null;
+    else if (isDateValid(input)) {
+        Log.d(TAG, "DOB valid, add to hashmap");
+            requiredFieldsValid.put(editText, input);
+        Log.d(TAG, "return true");
+            return true;
+        }
+    else {
+        requiredFieldsValid.put(editText, null);
+        formatInvalidInput(editText);
+        Log.d(TAG, "put DOB null into hashmap");
+        Log.d(TAG, "return false");
+        return false;
+    }
+
     }
 
     public void hideKeyboard(EditText editText) {
@@ -84,7 +104,7 @@ public String checkValidDate (String date, EditText editText, HashMap<EditText, 
 
     public Boolean isDateValid (String dateString) {
 
-    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         try {
         sdf.parse(dateString);

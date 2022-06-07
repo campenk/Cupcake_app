@@ -9,141 +9,164 @@
     tools:context=".AddUserActivity">
 
 
+    <TextView
+        android:id="@+id/textViewAddUser_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/addUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddUser_title">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editTextAddUser_Password"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginTop="32dp"
-                android:ems="10"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_username" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="@string/addUser"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <EditText
+                    android:id="@+id/editTextAddUser_Password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_username" />
 
-            <EditText
-                android:id="@+id/editTextAddUser_employeeNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginTop="32dp"
-                android:ems="10"
-                android:hint="@string/employeeNumber"
-                android:inputType="number"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_dateOfBirth" />
+                <EditText
+                    android:id="@+id/editTextAddUser_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:ems="10"
+                    android:hint="@string/username"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editTextAddUser_phoneNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginTop="32dp"
-                android:ems="10"
-                android:hint="@string/phoneNumber"
-                android:inputType="number|textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_employeeNumber" />
+                <Button
+                    android:id="@+id/buttonAddUser_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/manageUsersMenu"
+                    app:backgroundTint="@color/usersMenu"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonAddUser_submit" />
 
-            <EditText
-                android:id="@+id/editTextAddUser_dateOfBirth"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginTop="32dp"
-                android:ems="10"
-                android:hint="@string/dateOfBirth"
+                <EditText
+                    android:id="@+id/editTextAddUser_phoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:hint="@string/phoneNumber"
+                    android:inputType="number|textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_employeeNumber" />
 
-                android:inputType="none"
-                android:windowSoftInputMode="stateHidden|adjustResize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_Password" />
+                <EditText
+                    android:id="@+id/editTextAddUser_dateOfBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:imeOptions="actionNext"
+                    android:hint="@string/dateOfBirth"
+                    android:inputType="none"
+                    android:windowSoftInputMode="stateHidden|adjustResize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_Password" />
 
-            <EditText
-                android:id="@+id/editTextAddUser_username"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginTop="32dp"
-                android:ems="10"
-                android:hint="@string/addUser"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                <Button
+                    android:id="@+id/buttonAddUser_reset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:text="@string/reset"
+                    app:backgroundTint="@color/secondaryButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/buttonAddUser_submit" />
 
-            <EditText
-                android:id="@+id/editTextAddUser_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="@string/address"
-                android:inputType="textMultiLine"
-                android:lines="5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_phoneNumber" />
+                <EditText
+                    android:id="@+id/editTextAddUser_employeeNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:hint="@string/employeeNumber"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_dateOfBirth" />
 
-            <Button
-                android:id="@+id/buttonAddUser_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/submit"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_address" />
+                <Button
+                    android:id="@+id/buttonAddUser_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:text="@string/logout"
+                    app:backgroundTint="@color/secondaryButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/buttonAddUser_menu" />
 
-            <Button
-                android:id="@+id/buttonAddUser_reset"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/reset"
-                app:backgroundTint="@color/secondaryButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_address" />
+                <EditText
+                    android:id="@+id/editTextAddUser_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="@string/address"
+                    android:inputType="textMultiLine"
+                    android:imeOptions="actionDone"
+                    android:lines="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_phoneNumber" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
+                <Button
+                    android:id="@+id/buttonAddUser_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/submit"
+                    app:backgroundTint="@color/usersMenu"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextAddUser_address" />
 
-            <Button
-                android:id="@+id/buttonAddUser_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/manageUsersMenu"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonAddUser_reset" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

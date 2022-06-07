@@ -15,15 +15,13 @@
     <TextView
         android:id="@+id/textViewInventoryStatus_output"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/buttonInventoryStatus_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewInventoryStatus_title" />
@@ -42,29 +40,41 @@
         android:id="@+id/buttonInventoryStatus_InventoryMenu"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
         android:text="@string/inventoryMenu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:backgroundTint="@color/inventoryMenu"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonInventoryStatus_previous" />
 
     <Button
         android:id="@+id/buttonInventoryStatus_next"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginBottom="32dp"
         android:text="@string/next"
-        app:layout_constraintBottom_toTopOf="@+id/buttonInventoryStatus_InventoryMenu"
+        app:backgroundTint="@color/inventoryMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/buttonInventoryStatus_previous" />
 
     <Button
         android:id="@+id/buttonInventoryStatus_previous"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
         android:text="@string/previous"
-        app:layout_constraintBottom_toTopOf="@+id/buttonInventoryStatus_InventoryMenu"
+        app:backgroundTint="@color/inventoryMenu"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInventoryStatus_output" />
+
+    <Button
+        android:id="@+id/buttonInventoryStatus_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="@string/logout"
+        app:backgroundTint="@color/secondaryButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/buttonInventoryStatus_InventoryMenu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

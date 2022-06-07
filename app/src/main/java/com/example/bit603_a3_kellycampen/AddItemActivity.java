@@ -5,7 +5,6 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,6 +15,8 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 public class AddItemActivity extends AppCompatActivity   {
+
+    //  create class variables
     public static ItemDatabase itemDatabase;
 
     @Override
@@ -24,51 +25,61 @@ public class AddItemActivity extends AppCompatActivity   {
         setContentView(R.layout.activity_add_item);
         itemDatabase = Room.databaseBuilder(getApplicationContext(), ItemDatabase.class, "itemdb").allowMainThreadQueries().build();
 
+        //  get intent from previous activity
         Intent i = getIntent();
         String username =i.getStringExtra(getString(R.string.username));
 
+        //  create variables
         final EditText editTextItemName = findViewById(R.id.editTextAddItem_name);
         final EditText editTextItemQuantity = findViewById(R.id.editTextAddItem_quantity);
         final Button buttonSubmit = findViewById(R.id.buttonAddItem_Submit);
         final Button buttonInventoryMenu = findViewById(R.id.buttonAddItem_InventoryMenu);
         final Button buttonLogout = findViewById(R.id.buttonAddItem_logout);
 
+        //  Populate item type spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinnerAddItem_type);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.itemTypeArray, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-
-
-
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                HashMap<EditText, String> inputIsValid = new HashMap<>();
-                inputIsValid.put(editTextItemName, null);
-                inputIsValid.put(editTextItemQuantity, null);
-
+                HashMap<EditText, String> requiredFields = new HashMap<>();
                 Utilities util = new Utilities();
-                util.checkValidString(editTextItemName, inputIsValid);
-                util.checkValidInteger(editTextItemQuantity, inputIsValid);
-
-
-
-                String itemName = editTextItemName.getText().toString();
-                Integer itemQuantity = Integer.parseInt(editTextItemQuantity.getText().toString());
-
                 Item item = new Item();
-                item.setItemName(itemName);
-                item.setItemQuantity(itemQuantity);
 
-                itemDatabase.dao().addItem(item);
+                //  check valid inputs
+                if (util.checkValidString(editTextItemName, requiredFields)) {
+                    item.setItemName(editTextItemName.getText().toString());
+                }
 
-                Toast.makeText(getBaseContext(),"Item added successfully!", Toast.LENGTH_SHORT).show();
+                if (util.checkValidInteger(editTextItemQuantity, requiredFields)) {
+                    item.setItemQuantity(Integer.parseInt(editTextItemName.getText().toString()));
+                }
+
+                if (util.checkValidInteger(editTextItemQuantity, requiredFields)) {
+                    item.setItemQuantity(Integer.parseInt(editTextItemName.getText().toString()));
+                }
+
+                String itemType = spinner.getSelectedItem().toString();
+                if (itemType.equals(getString(R.string.biscuit)) || itemType.equals(getString(R.string.cookie)) || itemType.equals(getString(R.string.cake)) || itemType.equals(getString(R.string.ingredient)) || itemType.equals(getString(R.string.other))) {
+                    item.setItemType(itemType);
+                }
+
+                //  check all required fields are filled
+                if (!requiredFields.containsValue(null)) {
+                    //  add item to database
+                    itemDatabase.dao().addItem(item);
+                    Toast.makeText(getBaseContext(),"Item added successfully!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getBaseContext(),"Invalid inputs, please try again", Toast.LENGTH_SHORT).show();
+                }
+
+                //  reset entries
                 editTextItemName.setText("");
                 editTextItemQuantity.setText("");
             }
@@ -90,8 +101,5 @@ public class AddItemActivity extends AppCompatActivity   {
                 startActivity(i);
             }
         });
-
     }
-
-
 }

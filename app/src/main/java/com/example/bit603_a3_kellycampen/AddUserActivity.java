@@ -27,28 +27,27 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AddUserActivity extends AppCompatActivity {
+    //  create class variables
     public static UserDatabase_v2 userDatabase;
-    private final static String TAG = "Campen";
-    DatePickerDialog picker;
+    private DatePickerDialog picker;
     final Calendar cldr = Calendar.getInstance();
     int day = cldr.get(Calendar.DAY_OF_MONTH);
     int month = cldr.get(Calendar.MONTH);
-    String dateOfBirth;
-    Utilities util = new Utilities();
-    UserList userList = new UserList();
-
-
-
+    private String dateOfBirth;
+    private Utilities util = new Utilities();
+    private UserList userList = new UserList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
         userDatabase = Room.databaseBuilder(getApplicationContext(), UserDatabase_v2.class, "userdb").allowMainThreadQueries().build();
+
+        //  get intent from previous activity
         Intent i = getIntent();
         String username = i.getStringExtra(getString(R.string.username));
 
-
+        //  create variables
         final Button buttonSubmit = findViewById(R.id.buttonAddUser_submit);
         final EditText editTextUsername = findViewById(R.id.editTextAddUser_username);
         final EditText editTextPassword = findViewById(R.id.editTextAddUser_Password);
@@ -66,7 +65,6 @@ public class AddUserActivity extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
                         editTextDateOfBirth.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                         setDay(dayOfMonth);
                         setMonth(monthOfYear);
@@ -77,7 +75,7 @@ public class AddUserActivity extends AppCompatActivity {
                         editTextDateOfBirth.setText(dateOfBirth);
                     }
                 },year, month, day);
-        //  TODO: Change to when receives focus
+
         editTextDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -98,22 +96,21 @@ public class AddUserActivity extends AppCompatActivity {
             }
         });
 
-
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<EditText, String> requiredFields = new HashMap<>();
-                Log.d(TAG, "create hashmap");
+
+                //  check if user already exists
                 if (userList.userExists(editTextUsername.getText().toString(), users)) {
-                    Log.d(TAG, "User already exists");
                     Toast.makeText(getBaseContext(), "A user already exists with this username!", Toast.LENGTH_SHORT).show();
                     util.formatInvalidInput(editTextUsername);
                 }
 
                 else {
-                        Log.d(TAG, "user is not null");
                     User user = new User();
 
+                    //  check required fields are filled
                     if (util.checkValidString(editTextUsername, requiredFields)) {
                         user.setUsername(editTextUsername.getText().toString());
                     }
@@ -133,30 +130,21 @@ public class AddUserActivity extends AppCompatActivity {
                         user.setEmployeeNumber(Integer.parseInt(editTextEmployeeNumber.getText().toString()));
                     }
 
-                    Log.d(TAG, editTextDateOfBirth.getText().toString());
-                    Log.d(TAG, "checkValidDate function returns " + util.checkValidDate(editTextDateOfBirth, requiredFields).toString());
                     if (util.checkValidDate(editTextDateOfBirth, requiredFields)) {
-                        Log.d(TAG, "if checkValidDate function returns true - why tho");
                         user.setDateOfBirth(editTextDateOfBirth.getText().toString());
-                        Log.d(TAG, editTextDateOfBirth.getText().toString());
                     }
 
+                    //  check all required fields are valid
                     if (!requiredFields.containsValue(null)) {
-
-                            Log.d(TAG, "no values are null");
-                            userDatabase.dao().addUser(user);
-                            Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
-
+                        //  add user to database
+                        userDatabase.dao().addUser(user);
+                        Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
                         }
                     else {
                         Toast.makeText(getBaseContext(),"Invalid inputs, please try again", Toast.LENGTH_SHORT).show();
-
-                        Log.d(TAG, "required fields contains null values");
-
-                    }
                     }
                 }
-
+            }
         });
 
         buttonReset.setOnClickListener(new View.OnClickListener() {

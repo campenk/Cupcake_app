@@ -30,6 +30,11 @@
     <string name="next">Next</string>
     <string name="noItems">Error! There are no items in the inventory</string>
     <string name="logout">Log out</string>
+    <string name="biscuit">Biscuit</string>
+    <string name="cookie">Cookie</string>
+    <string name="cake">Cake</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="other">Other</string>
 
     <string-array name="itemTypeArray">
         <item>Biscuit</item>

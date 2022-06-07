@@ -33,7 +33,6 @@ public class RemoveUserActivity extends AppCompatActivity {
         final Button buttonFindUser = findViewById(R.id.buttonRemoveUser_find);
         final Button buttonMenu = findViewById(R.id.buttonRemoveUser_menu);
         final Button buttonLogout = findViewById(R.id.buttonRemoveUser_logout);
-        final Button buttonRemoveAll = findViewById(R.id.button);
 
         buttonFindUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,12 +103,6 @@ public class RemoveUserActivity extends AppCompatActivity {
             }
         });
 
-        buttonRemoveAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userDatabase.dao().clearAllUsers();
 
-            }
-        });
     }
 }

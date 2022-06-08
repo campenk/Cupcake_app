@@ -9,12 +9,12 @@ import java.util.List;
 public interface ItemDao {
 
     @Insert
-    public void addItem(Item item);
+    void addItem(Item item);
 
     @Query("SELECT * FROM Item")
-    public List<Item> getItems();
+    List<Item> getItems();
 
     @Query("DELETE FROM Item")
-    abstract void clearAllItems();
+    void clearAllItems();
 }
 

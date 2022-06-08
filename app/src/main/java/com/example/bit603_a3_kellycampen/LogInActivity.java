@@ -25,7 +25,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userDatabase = Room.databaseBuilder(getApplicationContext(), UserDatabase_v2.class, "userdb").allowMainThreadQueries().build();
+        userDatabase = Room.databaseBuilder(getApplicationContext(), UserDatabase_v2.class, getString(R.string.userDatabase)).allowMainThreadQueries().build();
 
         //  create variables
         Button buttonSubmit = findViewById(R.id.buttonLogin_submit);

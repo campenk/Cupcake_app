@@ -23,7 +23,7 @@ public class AddItemActivity extends AppCompatActivity   {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
-        itemDatabase = Room.databaseBuilder(getApplicationContext(), ItemDatabase.class, "itemdb").allowMainThreadQueries().build();
+        itemDatabase = Room.databaseBuilder(getApplicationContext(), ItemDatabase.class, getString(R.string.itemDatabase)).allowMainThreadQueries().build();
 
         //  get intent from previous activity
         Intent i = getIntent();
@@ -73,10 +73,10 @@ public class AddItemActivity extends AppCompatActivity   {
                 if (!requiredFields.containsValue(null)) {
                     //  add item to database
                     itemDatabase.dao().addItem(item);
-                    Toast.makeText(getBaseContext(),"Item added successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),getString(R.string.itemAdded), Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(getBaseContext(),"Invalid inputs, please try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),getString(R.string.invalidInputs), Toast.LENGTH_SHORT).show();
                 }
 
                 //  reset entries

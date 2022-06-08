@@ -5,7 +5,6 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,33 +12,32 @@ import android.widget.TextView;
 import java.util.List;
 
 public class InventoryStatusActivity extends AppCompatActivity {
+    //  create class variables
     public static ItemDatabase itemDatabase;
     private Integer pageNumber = 0;
-    private static String TAG = "Campen";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_status);
-        itemDatabase = Room.databaseBuilder(getApplicationContext(), ItemDatabase.class, "itemdb").allowMainThreadQueries().build();
+        itemDatabase = Room.databaseBuilder(getApplicationContext(), ItemDatabase.class, getString(R.string.itemDatabase)).allowMainThreadQueries().build();
+
+        //  get intent from previous activity
         Intent i = getIntent();
         String username = i.getStringExtra(getString(R.string.username));
 
+        //  create variables
         final TextView textViewOutput = findViewById(R.id.textViewInventoryStatus_output);
         final Button buttonInventoryMenu = findViewById(R.id.buttonInventoryStatus_InventoryMenu);
         final Button buttonNext = findViewById(R.id.buttonInventoryStatus_next);
         final Button buttonPrevious = findViewById(R.id.buttonInventoryStatus_previous);
         final Button buttonLogout = findViewById(R.id.buttonInventoryStatus_logout);
-
         List<Item> items = itemDatabase.dao().getItems();
-        Log.d(TAG, "items is null");
 
-        Integer pageNumber = 0;
+        //  set previous/next button visibility based on page number
         try {
             Integer totalPages = items.size() / 5;
-
             textViewOutput.setText(updateOutput(pageNumber, totalPages, items));
-
             if (getPageNumber() == 0) {
                 buttonPrevious.setVisibility(View.INVISIBLE);
             }
@@ -68,13 +66,10 @@ public class InventoryStatusActivity extends AppCompatActivity {
                         buttonPrevious.setVisibility(View.VISIBLE);
                     }
 
-
                     if (getPageNumber() == totalPages - 1) {
-                        Log.d(TAG, "setNext button invisible");
                         buttonNext.setVisibility(View.INVISIBLE);
                     }
                     else if(getPageNumber() < totalPages - 1) {
-                        Log.d(TAG, "setNext button visible");
                         buttonNext.setVisibility(View.VISIBLE);
                     }
                 }
@@ -85,7 +80,6 @@ public class InventoryStatusActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (getPageNumber() > 0) {
                         setPageNumber(getPageNumber() - 1);
-
                     }
                     textViewOutput.setText(updateOutput(getPageNumber(), totalPages, items));
                     if (getPageNumber() == 0) {
@@ -96,11 +90,9 @@ public class InventoryStatusActivity extends AppCompatActivity {
                     }
 
                     if (getPageNumber() == totalPages - 1) {
-                        Log.d(TAG, "setNext button invisible");
                         buttonNext.setVisibility(View.INVISIBLE);
                     }
                     else if(getPageNumber() < totalPages - 1) {
-                        Log.d(TAG, "setNext button visible");
                         buttonNext.setVisibility(View.VISIBLE);
                     }
                 }
@@ -111,10 +103,6 @@ public class InventoryStatusActivity extends AppCompatActivity {
             buttonPrevious.setVisibility(View.INVISIBLE);
             buttonNext.setVisibility(View.INVISIBLE);
         }
-
-
-
-
 
         buttonInventoryMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,19 +122,15 @@ public class InventoryStatusActivity extends AppCompatActivity {
         });
 
     }
-//  TODO: Check what happens if result is decimal
+
+    //  updates output depending on page number
     public String updateOutput (Integer pageNumber, Integer totalPages, List<Item> items) {
         String output = "Item\t\t\tQuantity\t\t\tType\n";
         for (int i = pageNumber*5; i < (pageNumber*5) + 5; i++) {
-            Log.d(TAG, "i = " + i);
             output += items.get(i).getItemName() + "\t\t\t" + items.get(i).getItemQuantity() + "\t\t\t" + items.get(i).getItemType() + "\n";
         }
-        Log.d(TAG, "Page number = " + getPageNumber().toString());
-        Log.d(TAG, "Total pages = " + totalPages.toString());
         return output;
     }
-
-
 
     public Integer getPageNumber() {
         return pageNumber;

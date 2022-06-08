@@ -14,8 +14,11 @@ public class ManageUsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_users);
 
+        //  get intent from previous activity
         Intent i = getIntent();
         String username = i.getStringExtra(getString(R.string.username));
+
+        //  create variables
         final Button buttonAddUser = findViewById(R.id.buttonManageUsers_AddUser);
         final Button buttonViewUsers = findViewById(R.id.buttonManageUsers_viewUsers);
         final Button buttonRemoveUsers = findViewById(R.id.buttonManageUsers_removeUser);

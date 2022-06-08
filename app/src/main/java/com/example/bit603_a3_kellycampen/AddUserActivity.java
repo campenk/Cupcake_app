@@ -3,25 +3,16 @@ package com.example.bit603_a3_kellycampen;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +32,7 @@ public class AddUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
-        userDatabase = Room.databaseBuilder(getApplicationContext(), UserDatabase_v2.class, "userdb").allowMainThreadQueries().build();
+        userDatabase = Room.databaseBuilder(getApplicationContext(), UserDatabase_v2.class, getString(R.string.userDatabase)).allowMainThreadQueries().build();
 
         //  get intent from previous activity
         Intent i = getIntent();
@@ -103,7 +94,7 @@ public class AddUserActivity extends AppCompatActivity {
 
                 //  check if user already exists
                 if (userList.userExists(editTextUsername.getText().toString(), users)) {
-                    Toast.makeText(getBaseContext(), "A user already exists with this username!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), getString(R.string.userAlreadyExists), Toast.LENGTH_SHORT).show();
                     util.formatInvalidInput(editTextUsername);
                 }
 
@@ -138,10 +129,10 @@ public class AddUserActivity extends AppCompatActivity {
                     if (!requiredFields.containsValue(null)) {
                         //  add user to database
                         userDatabase.dao().addUser(user);
-                        Toast.makeText(getBaseContext(),"User added successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),getString(R.string.userAdded), Toast.LENGTH_SHORT).show();
                         }
                     else {
-                        Toast.makeText(getBaseContext(),"Invalid inputs, please try again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),getString(R.string.invalidInputs), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

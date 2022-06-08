@@ -35,6 +35,21 @@
     <string name="cake">Cake</string>
     <string name="ingredient">Ingredient</string>
     <string name="other">Other</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="userNotFound">User not found</string>
+    <string name="userRemoved">User removed</string>
+    <string name="confirmRemoval">Confirm removal of user</string>
+    <string name="userDatabase">userDatabase</string>
+    <string name="itemDatabase">itemDatabase</string>
+    <string name="clearDatabaseConfirmation">Do you want to add clear all items from the database</string>
+    <string name="confirmationRequired">Confirmation required</string>
+    <string name="addTestItemsConfirmation">Do you want to add test items?</string>
+    <string name="passwordIncorrect">Password incorrect</string>
+    <string name="userAlreadyExists">A user already exists with this username</string>
+    <string name="userAdded">User added successfully</string>
+    <string name="invalidInputs">Invalid inputs, please try again</string>
+    <string name="itemAdded">Item added successfully</string>
 
     <string-array name="itemTypeArray">
         <item>Biscuit</item>

@@ -4,6 +4,15 @@ import java.util.List;
 
 public class UserList {
 
+    // @kelly: i feel like this class was is a good initial abstraction of logic, but it wants to do further.
+    // @kelly: i think part of it is in the name... perhaps calling it `Authenticator` would be better.
+    // @kelly:   then you could have a constructor for it that takes a list of users (for simplicity), then:
+    // @kelly:   - the userExists method just takes a username which is simpler
+    // @kelly:   - the userIsAdmin could also take just the users name
+    // @kelly:   OR
+    // @kelly:   - you could have a different method called isAuthorised which essentially does what userIsAdmin does.
+
+
     final private static String adminUserName = "admin";
     final private static String adminPassword = "CookieManagement84";
 

@@ -33,7 +33,7 @@ public class ManageInventoryActivity extends AppCompatActivity {
         final Button buttonLogout = findViewById(R.id.buttonManageInventory_logout);
 
         //  allow admin to access the Manage User menu
-        if (username.equals(getString(R.string.adminusername))) {
+        if (username.equals(getString(R.string.adminusername))) { // @kelly: to be more robust youd use your existing authorisation / isAdmin check here.
             buttonUserMenu.setVisibility(View.VISIBLE);
         }
         else {
@@ -61,10 +61,10 @@ public class ManageInventoryActivity extends AppCompatActivity {
         buttonClearItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // create dialog
+                // create dialog  // @kelly: again, calling methods with the names of your comments is easier to read.
                 AlertDialog.Builder builder = new AlertDialog.Builder(ManageInventoryActivity.this);
                 builder.setMessage(getString(R.string.clearDatabaseConfirmation))
-                        .setTitle(getString(R.string.confirmationRequired));
+                        .setTitle(getString(R.string.confirmationRequired));  // @kelly: this inconsistent indentation is kinda hard to read.
                 builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         itemDatabase.dao().clearAllItems();
@@ -81,7 +81,7 @@ public class ManageInventoryActivity extends AppCompatActivity {
         });
 
         buttonTestItems.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override  // @kelly: why do you need these ? :thinking:
             public void onClick(View v) {
                 // create dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(ManageInventoryActivity.this);

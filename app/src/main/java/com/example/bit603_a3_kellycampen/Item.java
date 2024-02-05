@@ -20,6 +20,24 @@ public class Item {
     @ColumnInfo(name = "ItemType")
     String itemType;
 
+    // @kelly: i notice you dont use constructors at all...
+    /*
+    *
+    *     public Item(Integer itemId, String itemName, Integer itemQuantity, String itemType) {
+              this.itemId = itemId;
+              this.itemName = itemName;
+              this.itemQuantity = itemQuantity;
+              this.itemType = itemType;
+          }
+    *
+    *   you can then do:
+    *
+    *   Item item = new Item(1, "apple", 2, "ingredient");
+    *
+    *   which is clearer to read.
+    *
+    * */
+
     public Integer getItemId() {
         return itemId;
     }

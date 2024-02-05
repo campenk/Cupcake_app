@@ -28,6 +28,7 @@ public class ManageUsersActivity extends AppCompatActivity {
         buttonAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // @kelly: this repeated logic is begging for a "Factory" class that takes the one bit of info that changes each time as a variable.
                 Intent i = new Intent(getApplicationContext(), AddUserActivity.class);
                 i.putExtra(getString(R.string.username), username);
                 startActivity(i);

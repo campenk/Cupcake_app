@@ -51,6 +51,8 @@ public class AddUserActivity extends AppCompatActivity {
         final Button buttonLogout = findViewById(R.id.buttonAddUser_logout);
         List<User> users = userDatabase.dao().getUsers();
 
+        // @kelly: this next bit is a nice pattern :thumbsup: as you end up with picker.show() or picker.hide() in the button callbacks which is really easy to read.
+
         // date picker dialog
         picker = new DatePickerDialog(AddUserActivity.this,
                 new DatePickerDialog.OnDateSetListener() {
@@ -100,6 +102,22 @@ public class AddUserActivity extends AppCompatActivity {
 
                 else {
                     User user = new User();
+
+                    // @kelly: i would separate the two processes below of field validation and setting values on your user.
+                    // @kelly: first i would have a list of fields and loop over that list calling checkValidString etc. maybe a list per inut type to make it simple.
+                    // @kelly: then if no fields have errors you can do your user value setting all in one go like
+                    /*
+                    *
+                    *  User user = new User();
+                    *  user.setUsername(requiredFields["username"]);
+                    *  user.setPassword(requiredFields["password"]);
+                    *
+                    *  etc.
+                    *
+                    *  Im using the value from requiredFields as its already undergone sanitisation and type conversion where needed.
+                    *  It'd make more sense to call it cleanedFields or something similar. validatedFields would also work.
+                    *
+                    * */
 
                     //  check required fields are filled
                     if (util.checkValidString(editTextUsername, requiredFields)) {
